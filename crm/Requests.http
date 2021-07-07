@@ -1,0 +1,7 @@
+GET http://localhost:8081/devices/info
+Keep-Alive: timeout=120
+Content-Type: application/json
+
+###
+
+GET http://localhost:8081/actuator
