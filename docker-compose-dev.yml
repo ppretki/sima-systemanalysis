@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+
+  zipkin:
+    image: openzipkin/zipkin-slim
+    environment:
+      - STORAGE_TYPE=mem
+    ports:
+      - 9411:9411
+volumes:
+  prometheus_data:

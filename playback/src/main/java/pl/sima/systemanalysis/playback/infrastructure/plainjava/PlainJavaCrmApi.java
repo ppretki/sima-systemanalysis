@@ -9,12 +9,19 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import pl.sima.systemanalysis.playback.CrmApi;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor
+@Qualifier("PlainJavaClient")
 @Service
 public class PlainJavaCrmApi implements CrmApi {
+
+    @Value("${connect.timeout.ms}")
+    private int connectTimeout;
+
+    @Value("${read.timeout.ms}")
+    private int readTimeout;
 
     @Value("${purejava.crm.address:}")
     private String crmURI;
@@ -24,6 +31,8 @@ public class PlainJavaCrmApi implements CrmApi {
     public String getDeviceInfo() {
         URL url = new URL(crmURI + "/devices/info");
         HttpURLConnection c = (HttpURLConnection) url.openConnection();
+        c.setReadTimeout(readTimeout);
+        c.setConnectTimeout(connectTimeout);
         c.setRequestMethod("GET");
         c.setDoOutput(true);
         c.connect();

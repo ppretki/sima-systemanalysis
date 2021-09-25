@@ -1,4 +1,4 @@
-GET http://localhost:8081/devices/info
+POST http://localhost:8081/devices/_create
 Keep-Alive: timeout=120
 Content-Type: application/json
 

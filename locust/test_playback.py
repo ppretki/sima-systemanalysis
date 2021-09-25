@@ -1,20 +1,28 @@
-from locust import task, SequentialTaskSet, HttpUser, constant, LoadTestShape
+from locust import task, TaskSet, HttpUser, constant
 import os
 import urllib3
 
 
-class PlaybackTest(SequentialTaskSet):
+class PlaybackTest(TaskSet):
 
     def __init__(self, parent):
         super(PlaybackTest, self).__init__(parent)
 
     @task
-    def session_start(self):
-        self.client.post("/session/start", timeout=60)
+    def session_start_apache(self):
+        self.client.post("/session/apache/start", timeout=60)
+
+    # @task
+    # def session_start_java(self):
+    #     self.client.post("/session/java/start", timeout=60)
+    #
+    # @task
+    # def session_start_spring(self):
+    #     self.client.post("/session/spring/start", timeout=60)
 
 
 class PlaybackUser(HttpUser):
     host = os.getenv('PLAYBACK_HOSTNAME') + ":" + os.getenv('PLAYBACK_PORT')
     tasks = [PlaybackTest]
-    wait_time = constant(1000)
+    wait_time = constant(1)
     urllib3.disable_warnings()

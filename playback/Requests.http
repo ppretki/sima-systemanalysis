@@ -1,3 +1,15 @@
-POST http://localhost:8082/session/start
+POST http://localhost:8082/session/apache/start
+Keep-Alive: timeout=120
+Content-Type: application/json
+
+###
+
+POST http://localhost:8082/session/java/start
+Keep-Alive: timeout=120
+Content-Type: application/json
+
+###
+
+POST http://localhost:8082/session/spring/start
 Keep-Alive: timeout=120
 Content-Type: application/json

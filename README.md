@@ -2,6 +2,7 @@
 
 ```shell
 docker swarm init --advertise-addr 192.168.1.28 && docker stack deploy --compose-file docker-compose.yml system_analysis
+docker swarm init --advertise-addr 192.168.1.28 && docker stack deploy --compose-file docker-compose-dev.yml system_analysis
 ```
 
 
